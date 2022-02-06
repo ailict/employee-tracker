@@ -54,3 +54,40 @@ function callback(answer) {
       		break;
   	}
 }
+
+function viewDepartments() {
+	db.connect(function(err) {
+		if (err) {
+			console.log("error connecting to db");
+			throw err;
+		}
+
+		console.log("hi again");
+	});
+
+	db.query("SELECT * FROM department", function (err, result, fields) {
+    	if (err) {
+    		console.log("error running sql");
+    		throw err;
+    	}
+
+    	console.log("hi again");
+
+    	var departments = [];
+    	Object.keys(result).forEach(function(key) {
+    		var row = result[key];
+    		console.log(row);
+    		departments.push(row);
+    	});
+
+    	var names = [];
+		for (var i = 0; i < departments.length; i++) {
+			var department = departments[i];
+			names.push(department.title);
+		}
+
+		var department_index = readlineSync.keyInSelect(names, "Which role would you like to view?");
+		var department = departments[department_index];
+		console.log(department);
+	});
+}
