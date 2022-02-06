@@ -91,3 +91,16 @@ function viewDepartments() {
 		console.log(department);
 	});
 }
+
+function viewRoles() {
+	var roles = db.query(`SELECT * FROM role;`);
+	var titles = [];
+	for (var i = 0; i < roles.length; i++) {
+		var role = roles[i];
+		titles.push(role.title);
+	}
+
+	var role_index = readlineSync.keyInSelect(titles, "Which role would you like to view?");
+	var role = roles[role_index];
+	console.log("id = " + role.id + ", title = " + role.title + ", salary = " + role.salary, + ", department_id = ", role.department_id);
+}
