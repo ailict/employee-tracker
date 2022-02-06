@@ -117,3 +117,18 @@ function viewEmployees() {
 	var employee = employees[employee_index];
 	console.log("id = " + employee.id + ", first_name = " + employee.first_name + ", last_name = " + employee.last_name, + ", role_id = ", employee.role_id);
 }
+
+function addDepartment() {
+	var name = readlineSync.question('What is the name of the deparment?');
+
+	db.query(`INSERT INTO department (name) VALUES (?);`, name);
+}
+
+function addRole() {
+	var title = readlineSync.question('What is the title of the role?');
+	var salary = readlinSync.question('What is the salary of the role (in dollars)?')
+	var department_id = readlinSync.question('What is the department_id of the role?')
+
+
+	db.query(`INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?);`, title, salary, department_id);
+}
