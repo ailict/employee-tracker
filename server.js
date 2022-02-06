@@ -132,3 +132,12 @@ function addRole() {
 
 	db.query(`INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?);`, title, salary, department_id);
 }
+
+function addEmployee() {
+	var first_name = readlineSync.question('What is the first name of the employee?');
+	var last_name = readlineSync.question('What is the last name of the employee?');
+	var role_id = readlineSync.question('What is the role ID of the employee?');
+	var manager_id = readlineSync.question('What is the employee ID of the manager?');
+
+	db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);`, first_name, last_name, role_id, manager_id);
+}
