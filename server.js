@@ -104,3 +104,16 @@ function viewRoles() {
 	var role = roles[role_index];
 	console.log("id = " + role.id + ", title = " + role.title + ", salary = " + role.salary, + ", department_id = ", role.department_id);
 }
+
+function viewEmployees() {
+	var employees = db.query(`SELECT * FROM employee;`);
+	var names = [];
+	for (var i = 0; i < employees.length; i++) {
+		var employee = employees[i];
+		names.push(employee.name);
+	}
+
+	var employee_index = readlineSync.keyInSelect(names, "Which employee would you like to view?");
+	var employee = employees[employee_index];
+	console.log("id = " + employee.id + ", first_name = " + employee.first_name + ", last_name = " + employee.last_name, + ", role_id = ", employee.role_id);
+}
