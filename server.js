@@ -179,3 +179,16 @@ function updateRole() {
 
 	db.query(query, first_name, last_name, role_id, manager_id);
 }
+
+function main() {
+	process.on('SIGTERM', () => {
+	 	process.kill(process.pid, 'SIGTERM');
+	});
+
+	while(true) {
+		var option = selectOption();
+		callback(option);
+	}
+}
+
+main();
