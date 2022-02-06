@@ -141,3 +141,41 @@ function addEmployee() {
 
 	db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);`, first_name, last_name, role_id, manager_id);
 }
+
+function updateRole() {
+	var columns = [];
+	var values = [];
+
+	var id = readlineSync.question('What is the id of the existing role?');
+
+	var title = readlineSync.question('What is the new title of the role?');
+	if (title.length > 0) {
+		columns.push("title");
+		values.push(title);
+	}
+
+	var salary = readlinSync.question('What is the new salary of the role (in dollars)?');
+	if (salary.length > 0) {
+		columns.push("salary");
+		values.push(salary);
+	}
+	var department_id = readlinSync.question('What is the new department_id of the role?');
+	if (department_id.length > 0) {
+		columns.push("department_id");
+		values.push(department_id);
+	}
+
+	var query = "UPDATE role SET "
+	for (var i = 0; i < columns.length; i++) {
+		query = query + columns[i] + " = " + values[i];
+
+		if (i < columns.length - 1) {
+			query = query + ",";
+		}
+		query = query + " ";
+	}
+	query = query + "WHERE id = " + id;
+
+
+	db.query(query, first_name, last_name, role_id, manager_id);
+}
